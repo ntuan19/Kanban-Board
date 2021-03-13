@@ -1,0 +1,134 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+
+        <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- this would find the css file to connect with layout page. Also, it has the url_for which searches for the folder and filename is specified afterwards -->   
+   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }} ">
+     
+    <title> Kanban Board</title>
+    </head>
+
+    <body>
+        <div class = "container-fluid">
+        <div class = "row">
+            <div class="col-4">
+                <h1>To-Do</h1>
+                <ul class="list-group">
+                    {% for todo in todo_list %}
+                    <li class="list-group-item">
+                    <div class = "row">
+                        {{ todo.id }} | {{todo.title}}
+                        <form action="/update/{{todo.id}}/Doing", method="GET">
+                            <button type="submit"> Doing </button>
+                        </form>
+                        <form action="/update/{{todo.id}}/Done", method="GET">
+                            <button type="submit"> Done </button>
+                        </form>
+                        <form action="/delete/{{todo.id}}", method="GET">
+                            <button type="submit"> Delete </button>
+                        </form>
+                    </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <form action="/add" method="POST">
+                    <input type="text" name="title" placeholder="Add New Todo">
+                    <button type="submit">Add</button>
+                </form>
+            </div>
+
+            <!--Doing container-->
+            <div class="col-4">
+                <h1>Doing</h1>
+                <ul class="list-group">
+                    {% for doing in doing_list %}
+                    <li class="list-group-item">
+                    <div class = "row">
+                        {{ doing.id }} | {{doing.title}}
+                        <form action="/update/{{doing.id}}/Todo", method="GET">
+                            <button type="submit"> Todo </button>
+                        </form>
+                        <form action="/update/{{doing.id}}/Done", method="GET">
+                            <button type="submit"> Done </button>
+                        </form>
+                        <form action="/delete/{{doing.id}}", method="GET">
+                            <button type="submit"> Delete</button>
+                        </form>
+                    </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!--done container-->
+            <div class="col-4">
+                <h1>Done</h1>
+                <ul class="list-group">
+                    {% for done in done_list %}
+                    <li class="list-group-item">
+                    <div class = "row">
+                        {{ done.id }} | {{done.title}}
+                        <form action="/update/{{done.id}}/Todo", method="GET">
+                            <button type="submit"> Todo </button>
+                        </form>
+                        <form action="/update/{{done.id}}/Doing", method="GET">
+                            <button type="submit"> Doing </button>
+                        </form>
+                        <form action="/delete/{{done.id}}", method="GET">
+                            <button type="submit"> Delete </button>
+                        </form>
+                    </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        
+        
+        
+            <!-- <div class = "col-4">
+                <h1>Doing <i class="fa fa-plus"></i></h1> <input type="text" name="title" placeholder="Add New Todo">
+                <ul>
+                    {% for doing in doing_list %}
+                    <li><span><i class="fa fa-trash"></i></span> 
+                        {{ doing.id }} | {{doing.title}}
+                        {% if doing.com_plete == False %}
+                            <button href="/update_doing_complete/{{ doing.id }}" > Complete</button>
+                        {% elif doing.to_do == False %}
+                            <button href="/update_doing_todo/{{ doing.id }}" > Todo  </button>
+                        {% else %}
+                            <button href="/update_doing_complete/{{ doing.id }}"> Complete </button>
+                            <button href="/update_doing_todo/{{ doing.id }}">Todo</button>
+                            <a href="/delete/{{ doing.id }}">Delete</a>
+                        {% endif %}   
+                    </li>
+                    
+                    <button href=""> Update to Doing </button>
+                    <button href=""> Update to Completed </button>
+                    <button href=""> Delete</button>
+                    -->
+<!--                 
+                    {% endfor %}
+                </ul>
+            </div> -->
+            <!-- <div class = "col-4">
+                Empty 
+            </div> -->
+           <!-- <div class = column>
+            <div class="col" id="container">
+            <h1>Done <i class="fa fa-plus"></i></h1> <input type="text" placeholder="Add New Todo">
+            <ul>
+                <li><span><i class="fa fa-trash"></i></span> Go To Maths Class</li>
+                <li><span><i class="fa fa-trash"></i></span> Buy New Clothes</li>
+                <li><span><i class="fa fa-trash"></i></span> Visit George</li>
+            </ul>
+        </div>
+          </div> -->
+        </div>
+        </div>
+    </body>
+</html>
