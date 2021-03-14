@@ -27,6 +27,7 @@ Another way to launch the web app
     $ pip3 install -r requirements.txt  
     $ export FLASK_APP=kanban.py
     $ flask run
+  
 
 
 
@@ -38,3 +39,5 @@ Your Kanban board should be up and running at http://127.0.0.1:5000/
 On the project root directory, run
 
     $ python3 test.py
+    $ python3 python3 -m unittest discover test
+
