@@ -20,6 +20,17 @@ Start flask server
 
     $ python3 kanban.py
 
+Another way to launch the web app
+
+    $ python3.6 -m venv .venv 
+    $ source .venv/bin/activate
+    $ pip3 install -r requirements.txt  
+    $ export FLASK_APP=kanban.py
+    $ flask run
+
+
+
+
 Your Kanban board should be up and running at http://127.0.0.1:5000/
 
 ## Unit Testing
