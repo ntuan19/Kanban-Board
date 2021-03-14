@@ -1,7 +1,6 @@
 <!DOCTYPE html> 
 <html>
     <head>
-
         <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -9,20 +8,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- this would find the css file to connect with layout page. Also, it has the url_for which searches for the folder and filename is specified afterwards -->   
    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }} ">
-     
+    
     <title> Kanban Board</title>
     </head>
 
+
     <body>
+        <!--The container-fluid class gives a full-width container which spans the entire width of the viewpor -->
         <div class = "container-fluid">
+        <!--Class row is used to hold column in itself-->
         <div class = "row">
+        <!--Specifies the width-->
             <div class="col-4">
+                <!--header tag creates the header for the column-->
                 <h1>To-Do</h1>
+                <!-- The <ul> is an unordered (bulleted) list tag. Combine <ul> tag with <li> tag, we can create unordered list-->
+                <!--The list-group is an unordered list with list items and the proper classes.-->
                 <ul class="list-group">
                     {% for todo in todo_list %}
                     <li class="list-group-item">
                     <div class = "row">
+                         <!-- This one is used to display the variable that our fucntion index return, we use { %  % } for python code -->
                         {{ todo.id }} | {{todo.title}}
+                        <!--The form specifies where to send the form-date when a form is submitted.-->
                         <form action="/update/{{todo.id}}/Doing", method="GET">
                             <button type="submit"> Doing </button>
                         </form>
@@ -37,7 +45,9 @@
                     {% endfor %}
                 </ul>
                 <form action="/add" method="POST">
+                    <!-- Input specified type with text and a placeholder -->
                     <input type="text" name="title" placeholder="Add New Todo">
+                    <!--Create a button-->
                     <button type="submit">Add</button>
                 </form>
             </div>
@@ -87,47 +97,6 @@
                     {% endfor %}
                 </ul>
             </div>
-        
-        
-        
-            <!-- <div class = "col-4">
-                <h1>Doing <i class="fa fa-plus"></i></h1> <input type="text" name="title" placeholder="Add New Todo">
-                <ul>
-                    {% for doing in doing_list %}
-                    <li><span><i class="fa fa-trash"></i></span> 
-                        {{ doing.id }} | {{doing.title}}
-                        {% if doing.com_plete == False %}
-                            <button href="/update_doing_complete/{{ doing.id }}" > Complete</button>
-                        {% elif doing.to_do == False %}
-                            <button href="/update_doing_todo/{{ doing.id }}" > Todo  </button>
-                        {% else %}
-                            <button href="/update_doing_complete/{{ doing.id }}"> Complete </button>
-                            <button href="/update_doing_todo/{{ doing.id }}">Todo</button>
-                            <a href="/delete/{{ doing.id }}">Delete</a>
-                        {% endif %}   
-                    </li>
-                    
-                    <button href=""> Update to Doing </button>
-                    <button href=""> Update to Completed </button>
-                    <button href=""> Delete</button>
-                    -->
-<!--                 
-                    {% endfor %}
-                </ul>
-            </div> -->
-            <!-- <div class = "col-4">
-                Empty 
-            </div> -->
-           <!-- <div class = column>
-            <div class="col" id="container">
-            <h1>Done <i class="fa fa-plus"></i></h1> <input type="text" placeholder="Add New Todo">
-            <ul>
-                <li><span><i class="fa fa-trash"></i></span> Go To Maths Class</li>
-                <li><span><i class="fa fa-trash"></i></span> Buy New Clothes</li>
-                <li><span><i class="fa fa-trash"></i></span> Visit George</li>
-            </ul>
-        </div>
-          </div> -->
         </div>
         </div>
     </body>
